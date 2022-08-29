@@ -1,0 +1,8 @@
+---
+- hosts: all
+  tasks:
+    - name: list dir
+      command: ls
+    - name: security patches
+      apt:
+        upgrade: yes
