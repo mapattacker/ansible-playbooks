@@ -3,6 +3,6 @@
   tasks:
     - name: list dir
       command: ls
-    - name: security patches
-      apt:
-        upgrade: yes
+#     - name: security patches
+#       apt:
+#         upgrade: yes
