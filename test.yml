@@ -3,6 +3,8 @@
   tasks:
     - name: list dir
       command: ls
+    - name: make file
+      command: touch test.txt
 #     - name: security patches
 #       apt:
 #         upgrade: yes
