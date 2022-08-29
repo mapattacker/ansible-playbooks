@@ -1,10 +1,10 @@
 ---
 - hosts: all
   tasks:
-    - name: list dir
-      command: ls
     - name: make file
-      command: touch test.txt
+      command: touch ~/test.txt
+    - name: list dir
+      command: ls ~/
 #     - name: security patches
 #       apt:
 #         upgrade: yes
