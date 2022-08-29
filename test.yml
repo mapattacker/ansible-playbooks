@@ -1,6 +1,8 @@
 ---
 - hosts: all
   tasks:
+    - name: pwd
+      command: pwd
     - name: make file
       command: touch ~/test.txt
     - name: list dir
