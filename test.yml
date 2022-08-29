@@ -4,9 +4,9 @@
     - name: pwd
       command: pwd
     - name: make file
-      command: touch ~/test.txt
+      command: touch /home/ubuntu/test.txt
     - name: list dir
-      command: ls ~/
+      command: ls /home/ubuntu
 #     - name: security patches
 #       apt:
 #         upgrade: yes
