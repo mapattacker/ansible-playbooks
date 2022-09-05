@@ -1,0 +1,14 @@
+---
+- hosts: all
+  become: true
+  tasks:
+    - name: list dir
+      command: ls /home/ubuntu/
+    - name: security patches
+      apt:
+        upgrade: yes
+        update_cache: yes
+    # - name: deploy
+      # command: |
+      #   docker compose pull
+      #   docker compose up -d
