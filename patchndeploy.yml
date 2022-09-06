@@ -1,14 +1,16 @@
 ---
 - hosts: all
   become: true
+  vars:
+    homefolder: /home/ubuntu
   tasks:
-    - name: list dir
-      command: ls /home/ubuntu/
     - name: security patches
       apt:
         upgrade: yes
         update_cache: yes
-    # - name: deploy
-      # command: |
-      #   docker compose pull
-      #   docker compose up -d
+    - name: pull docker images
+      command: docker compose -f {{homefolder}}/docker-compose.yml pull
+    - name: pull docker images
+      command: docker compose -f {{homefolder}}/docker-compose.yml up -d
+    - name: get docker status
+      command: docker ps
