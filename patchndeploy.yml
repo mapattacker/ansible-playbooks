@@ -8,6 +8,7 @@
       apt:
         upgrade: yes
         update_cache: yes
+      when: ansible_os_family == "Debian"
     - name: pull docker images
       command: docker compose -f {{homefolder}}/docker-compose.yml pull
     - name: pull docker images
