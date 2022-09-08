@@ -4,11 +4,21 @@
   vars:
     homefolder: /home/ubuntu
   tasks:
-    - name: security patches
+    # security
+    - name: security patches for Ubuntu
       apt:
         upgrade: yes
         update_cache: yes
       when: ansible_os_family == "Debian"
+    - name: security patches for AWS linux
+      yum:
+        upgrade: yes
+        update_cache: yes
+      when: ansible_distribution == "Amazon"
+
+    # docker
+    - name: prune docker
+      command: docker system prune -f
     - name: pull docker images
       command: docker compose -f {{homefolder}}/docker-compose.yml pull
     - name: pull docker images
