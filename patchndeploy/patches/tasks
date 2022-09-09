@@ -1,0 +1,11 @@
+- name: security patches for Ubuntu
+  apt:
+    upgrade: yes
+    update_cache: yes
+  when: ansible_os_family == "Debian"
+
+- name: security patches for AWS linux
+  yum:
+    upgrade: yes
+    update_cache: yes
+  when: ansible_os_family == "RedHat"
