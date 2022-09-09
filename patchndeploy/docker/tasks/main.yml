@@ -1,0 +1,19 @@
+- name: prune docker
+  command: docker image prune -f
+
+- name: pull docker images, ubuntu
+  command: docker compose -f {{ubuntu_home}}/docker-compose.yml pull
+  when: ansible_os_family == "Debian"
+- name: pull docker images, aws linux
+  command: docker compose -f {{awslinux_home}}/docker-compose.yml pull
+  when: ansible_os_family == "RedHat"
+
+- name: pull docker images, ubuntu
+  command: docker compose -f {{ubuntu_home}}/docker-compose.yml up -d
+  when: ansible_os_family == "Debian"
+- name: pull docker images, aws linux
+  command: docker compose -f {{awslinux_home}}/docker-compose.yml up -d
+  when: ansible_os_family == "RedHat"
+
+- name: get docker status
+  command: docker ps
