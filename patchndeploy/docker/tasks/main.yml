@@ -8,10 +8,10 @@
   command: docker compose -f {{awslinux_home}}/docker-compose.yml pull
   when: ansible_os_family == "RedHat"
 
-- name: pull docker images, ubuntu
+- name: deploy docker images, ubuntu
   command: docker compose -f {{ubuntu_home}}/docker-compose.yml up -d
   when: ansible_os_family == "Debian"
-- name: pull docker images, aws linux
+- name: deploy docker images, aws linux
   command: docker compose -f {{awslinux_home}}/docker-compose.yml up -d
   when: ansible_os_family == "RedHat"
 
