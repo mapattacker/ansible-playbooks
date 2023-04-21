@@ -5,14 +5,14 @@
   command: docker compose -f {{ubuntu_home}}/docker-compose.yml pull
   when: ansible_os_family == "Debian"
 - name: pull docker images, aws linux
-  command: docker compose -f {{awslinux_home}}/docker-compose.yml pull
+  command: docker-compose -f {{awslinux_home}}/docker-compose.yml pull
   when: ansible_os_family == "RedHat"
 
 - name: deploy docker images, ubuntu
   command: docker compose -f {{ubuntu_home}}/docker-compose.yml up -d
   when: ansible_os_family == "Debian"
 - name: deploy docker images, aws linux
-  command: docker compose -f {{awslinux_home}}/docker-compose.yml up -d
+  command: docker-compose -f {{awslinux_home}}/docker-compose.yml up -d
   when: ansible_os_family == "RedHat"
 
 - name: get docker status
