@@ -4,5 +4,5 @@ An example of a single playbook `patchndeploy.yml` and role-based playbooks with
 
 ## local testing
 
-- change `host: localhost`
-- run `ansible-playbook <filename>.yml
+- change `hosts: localhost`
+- run `ansible-playbook <filename>.yml`
