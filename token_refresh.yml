@@ -15,3 +15,7 @@
         docker login -u "$CI_REGISTRY_TOKEN_NAME" -p "$CI_TOKEN" "$CI_REGISTRY" 
         unset CI_REGISTRY
         docker images
+      register: docker_images_output
+    - name: Print Docker images output
+      debug:
+        var: docker_images_output.stdout_lines
