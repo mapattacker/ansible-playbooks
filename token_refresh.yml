@@ -3,14 +3,15 @@
   become: true
   tasks:
     - name: get all variables
-      command: |
-        ST_KEY=$(curl -s http://169.254.169.254/latest/meta-data/tags/instance/Gitlab) 
-        export CI_TOKEN=$(aws secretsmanager get-secret-value --secret-id secret-aipo-mlops-gitlab-token | jq -r --arg ST_KEY "$ST_KEY" '.SecretString | fromjson | .[$ST_KEY]')
-    - name: update gitlab token
       environment:
         CI_REGISTRY: registry.gitlab.com
         CI_REGISTRY_TOKEN_NAME: ec2-image-pull
-      command: |
+      shell: |
+        ST_KEY=$(curl -s http://169.254.169.254/latest/meta-data/tags/instance/Gitlab) 
+        export CI_TOKEN=$(aws secretsmanager get-secret-value --secret-id secret-aipo-mlops-gitlab-token | jq -r --arg ST_KEY "$ST_KEY" '.SecretString | fromjson | .[$ST_KEY]')
+    - name: update gitlab token
+      shell: |
         docker logout "$CI_REGISTRY" 
         docker login -u "$CI_REGISTRY_TOKEN_NAME" -p "$CI_TOKEN" "$CI_REGISTRY" 
+        unset CI_REGISTRY
         docker images
