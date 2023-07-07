@@ -9,6 +9,10 @@
         CI_REGISTRY_TOKEN_NAME: ec2-image-pull
       shell: |
         ST_KEY=$(curl -s http://169.254.169.254/latest/meta-data/tags/instance/Gitlab)
+        if [[ "$ST_KEY" == *"404"* ]]; then
+          echo "ST_KEY contains '404'. Unable to extract EC2 metadata for Gitlab."
+          exit 1
+        fi
         export CI_TOKEN="glpat"-$(aws secretsmanager get-secret-value --secret-id secret-aipo-mlops-gitlab-token | jq -r --arg ST_KEY "$ST_KEY" '.SecretString | fromjson | .[$ST_KEY]')
         docker logout "$CI_REGISTRY"
         docker login -u "$CI_REGISTRY_TOKEN_NAME" -p "$CI_TOKEN" "$CI_REGISTRY"
